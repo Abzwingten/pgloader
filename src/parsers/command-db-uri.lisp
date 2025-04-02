@@ -93,10 +93,16 @@
                 network-label-letters-digit)))
   (:text t))
 
+(defrule network-label-with-underscore
+    (and network-label-letters-digit
+         (+ (or (and #\_ network-label-letters-digit)
+                network-label-letters-digit)))
+  (:text t))
+
 (defrule network-label-no-hyphen (+ network-label-letters-digit)
   (:text t))
 
-(defrule network-label (or network-label-with-hyphen network-label-no-hyphen)
+(defrule network-label (or network-label-with-hyphen network-label-no-hyphen network-label-with-underscore)
   (:identity t))
 
 (defrule network-hostname (and network-label (* (and "." network-label)))
